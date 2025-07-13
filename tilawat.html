@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غَوْثَّ - Ghawth | التلاوات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">غَوْثَّ</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="ad3eya.html" class="nav-link">
+                    <i class="fas fa-pray"></i>
+                    <span>الأدعية</span>
+                </a>
+                <a href="tilawat.html" class="nav-link active">
+                    <i class="fas fa-quran"></i>
+                    <span>التلاوات</span>
+                </a>
+                <a href="ta2amolat.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>التأملات</span>
+                </a>
+                <a href="favorites.html" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>المفضلة</span>
+                </a>
+                <a href="prayer.html" class="nav-link">
+                    <i class="fas fa-mosque"></i>
+                    <span>أوقات الصلاة</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>حول غوث</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1 class="page-title">التلاوات القرآنية</h1>
+            <p class="page-subtitle">تلاوات مميزة من القرآن الكريم</p>
+        </section>
+
+        <!-- Recitation Section -->
+        <section class="recitation-section">
+            <div class="section-header">
+                <h2>تلاوة اليوم</h2>
+                <button class="change-btn" id="changeRecitationBtn">
+                    <i class="fas fa-sync-alt"></i>
+                    تغيير التلاوة
+                </button>
+            </div>
+            
+            <div class="recitation-card" id="recitationCard">
+                <div class="recitation-info">
+                    <h3 class="recitation-title" id="recitationTitle">سورة البقرة - الشيخ عبد الباسط عبد الصمد</h3>
+                    <p class="recitation-reciter" id="recitationReciter">عبد الباسط عبد الصمد</p>
+                </div>
+                
+                <div class="video-container">
+                    <iframe id="quranVideo" 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="recitation-actions">
+                    <button class="action-btn favorite-btn" id="addRecitationToFavoritesBtn">
+                        <i class="fas fa-star"></i>
+                        إضافة للمفضلة
+                    </button>
+                    <button class="action-btn share-btn" id="shareRecitationBtn">
+                        <i class="fas fa-share-alt"></i>
+                        مشاركة
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reciters Section -->
+        <section class="reciters-section">
+            <div class="section-header">
+                <h2>القراء المميزون</h2>
+            </div>
+            
+            <div class="reciters-grid">
+                <button class="reciter-btn" data-reciter="abdul-basit">
+                    <i class="fas fa-user"></i>
+                    <span>عبد الباسط عبد الصمد</span>
+                </button>
+                <button class="reciter-btn" data-reciter="mishary">
+                    <i class="fas fa-user"></i>
+                    <span>مشاري العفاسي</span>
+                </button>
+                <button class="reciter-btn" data-reciter="saad">
+                    <i class="fas fa-user"></i>
+                    <span>سعد الغامدي</span>
+                </button>
+                <button class="reciter-btn" data-reciter="ahmad">
+                    <i class="fas fa-user"></i>
+                    <span>أحمد العجمي</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 

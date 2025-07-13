@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غَوْثَّ - Ghawth | المفضلة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">غَوْثَّ</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="ad3eya.html" class="nav-link">
+                    <i class="fas fa-pray"></i>
+                    <span>الأدعية</span>
+                </a>
+                <a href="tilawat.html" class="nav-link">
+                    <i class="fas fa-quran"></i>
+                    <span>التلاوات</span>
+                </a>
+                <a href="ta2amolat.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>التأملات</span>
+                </a>
+                <a href="favorites.html" class="nav-link active">
+                    <i class="fas fa-star"></i>
+                    <span>المفضلة</span>
+                </a>
+                <a href="prayer.html" class="nav-link">
+                    <i class="fas fa-mosque"></i>
+                    <span>أوقات الصلاة</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>حول غوث</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1 class="page-title">المفضلة</h1>
+            <p class="page-subtitle">الأذكار والأدعية والتأملات المحفوظة</p>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-star"></i>
+                    <div class="stat-number" id="totalFavorites">0</div>
+                    <div class="stat-label">إجمالي المفضلة</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-share-alt"></i>
+                    <div class="stat-number" id="totalShares">0</div>
+                    <div class="stat-label">مرات المشاركة</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hand-paper"></i>
+                    <div class="stat-number" id="totalTasbeeh">0</div>
+                    <div class="stat-label">عدد التسبيحات</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Section -->
+        <section class="favorites-section">
+            <div class="section-header">
+                <h2>العناصر المحفوظة</h2>
+                <button class="clear-btn" id="clearAllFavoritesBtn">
+                    <i class="fas fa-trash"></i>
+                    مسح الكل
+                </button>
+            </div>
+            
+            <div class="favorites-container" id="favoritesContainer">
+                <!-- Favorites will be loaded here dynamically -->
+            </div>
+            
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-star"></i>
+                <h3>لا توجد عناصر في المفضلة</h3>
+                <p>ابدأ بإضافة الأذكار والأدعية والتأملات إلى المفضلة</p>
+                <a href="index.html" class="action-btn">
+                    <i class="fas fa-home"></i>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize favorites page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFavorites();
+            loadStats();
+        });
+
+        function loadFavorites() {
+            const favorites = JSON.parse(localStorage.getItem('ghawth_favorites') || '[]');
+            const container = document.getElementById('favoritesContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (favorites.length === 0) {
+                container.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            container.style.display = 'block';
+            emptyState.style.display = 'none';
+            
+            container.innerHTML = '';
+            
+            favorites.forEach((item, index) => {
+                const favoriteCard = createFavoriteCard(item, index);
+                container.appendChild(favoriteCard);
+            });
+        }
+
+        function createFavoriteCard(item, index) {
+            const card = document.createElement('div');
+            card.className = 'favorite-card';
+            
+            const typeIcon = getTypeIcon(item.type || 'dhikr');
+            const typeLabel = getTypeLabel(item.type || 'dhikr');
+            
+            card.innerHTML = `
+                <div class="favorite-header">
+                    <div class="favorite-type">
+                        <i class="${typeIcon}"></i>
+                        <span>${typeLabel}</span>
+                    </div>
+                    <button class="remove-btn" onclick="removeFavorite(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="favorite-content">
+                    <div class="favorite-text">${item.text}</div>
+                    <div class="favorite-translation">${item.translation}</div>
+                    ${item.author ? `<div class="favorite-author">${item.author}</div>` : ''}
+                </div>
+                <div class="favorite-actions">
+                    <button class="action-btn share-btn" onclick="shareFavorite(${index})">
+                        <i class="fas fa-share-alt"></i>
+                        مشاركة
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function getTypeIcon(type) {
+            const icons = {
+                'dhikr': 'fas fa-pray',
+                'dua': 'fas fa-pray',
+                'reflection': 'fas fa-heart',
+                'recitation': 'fas fa-quran'
+            };
+            return icons[type] || 'fas fa-star';
+        }
+
+        function getTypeLabel(type) {
+            const labels = {
+                'dhikr': 'ذكر',
+                'dua': 'دعاء',
+                'reflection': 'تأمل',
+                'recitation': 'تلاوة'
+            };
+            return labels[type] || 'عنصر';
+        }
+
+        function removeFavorite(index) {
+            const favorites = JSON.parse(localStorage.getItem('ghawth_favorites') || '[]');
+            favorites.splice(index, 1);
+            localStorage.setItem('ghawth_favorites', JSON.stringify(favorites));
+            loadFavorites();
+            loadStats();
+        }
+
+        function shareFavorite(index) {
+            const favorites = JSON.parse(localStorage.getItem('ghawth_favorites') || '[]');
+            const item = favorites[index];
+            
+            if (!item) return;
+            
+            const shareText = `${item.text}\n\n${item.translation}\n\n#غوث #مفضلة #إسلام`;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    showMessage('تم نسخ العنصر إلى الحافظة', 'success');
+                }).catch(() => {
+                    fallbackCopyToClipboard(shareText);
+                });
+            } else {
+                fallbackCopyToClipboard(shareText);
+            }
+        }
+
+        function loadStats() {
+            // Load total favorites
+            const favorites = JSON.parse(localStorage.getItem('ghawth_favorites') || '[]');
+            document.getElementById('totalFavorites').textContent = favorites.length;
+            
+            // Load share count
+            const shareCount = localStorage.getItem('ghawth_share_count') || '0';
+            document.getElementById('totalShares').textContent = shareCount;
+            
+            // Load tasbeeh count
+            const tasbeehCount = localStorage.getItem('ghawth_tasbeeh_count') || '0';
+            document.getElementById('totalTasbeeh').textContent = tasbeehCount;
+        }
+
+        // Clear all favorites
+        document.getElementById('clearAllFavoritesBtn').addEventListener('click', function() {
+            if (confirm('هل أنت متأكد من حذف جميع المفضلة؟')) {
+                localStorage.removeItem('ghawth_favorites');
+                loadFavorites();
+                loadStats();
+            }
+        });
+
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showMessage('تم نسخ العنصر إلى الحافظة', 'success');
+            } catch (err) {
+                showMessage('فشل في نسخ العنصر', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showMessage(message, type = 'success') {
+            // Create temporary message element
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${type}`;
+            messageElement.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(messageElement);
+            
+            setTimeout(() => {
+                messageElement.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html> 

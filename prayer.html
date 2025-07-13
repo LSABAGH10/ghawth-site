@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غَوْثَّ - Ghawth | أوقات الصلاة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="index.html">غَوْثَّ</a>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>الرئيسية</span>
+                </a>
+                <a href="ad3eya.html" class="nav-link">
+                    <i class="fas fa-pray"></i>
+                    <span>الأدعية</span>
+                </a>
+                <a href="tilawat.html" class="nav-link">
+                    <i class="fas fa-quran"></i>
+                    <span>التلاوات</span>
+                </a>
+                <a href="ta2amolat.html" class="nav-link">
+                    <i class="fas fa-heart"></i>
+                    <span>التأملات</span>
+                </a>
+                <a href="favorites.html" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span>المفضلة</span>
+                </a>
+                <a href="prayer.html" class="nav-link active">
+                    <i class="fas fa-mosque"></i>
+                    <span>أوقات الصلاة</span>
+                </a>
+                <a href="about.html" class="nav-link">
+                    <i class="fas fa-info-circle"></i>
+                    <span>حول غوث</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <section class="page-header">
+            <h1 class="page-title">أوقات الصلاة</h1>
+            <p class="page-subtitle">مواقيت الصلاة اليومية</p>
+        </section>
+
+        <!-- Prayer Times Section -->
+        <section class="prayer-times-section">
+            <div class="section-header">
+                <h2>مواقيت الصلاة اليوم</h2>
+                <div class="date-display">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span id="prayerDate"></span>
+                </div>
+            </div>
+            
+            <div class="prayer-times-grid">
+                <div class="prayer-time-card fajr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3>الفجر</h3>
+                        <div class="prayer-time" id="fajrTime">04:30</div>
+                    </div>
+                </div>
+                
+                <div class="prayer-time-card dhuhr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3>الظهر</h3>
+                        <div class="prayer-time" id="dhuhrTime">12:15</div>
+                    </div>
+                </div>
+                
+                <div class="prayer-time-card asr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3>العصر</h3>
+                        <div class="prayer-time" id="asrTime">15:45</div>
+                    </div>
+                </div>
+                
+                <div class="prayer-time-card maghrib">
+                    <div class="prayer-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3>المغرب</h3>
+                        <div class="prayer-time" id="maghribTime">18:20</div>
+                    </div>
+                </div>
+                
+                <div class="prayer-time-card isha">
+                    <div class="prayer-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3>العشاء</h3>
+                        <div class="prayer-time" id="ishaTime">19:45</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Prayer Section -->
+        <section class="next-prayer-section">
+            <div class="section-header">
+                <h2>الصلاة القادمة</h2>
+            </div>
+            
+            <div class="next-prayer-card" id="nextPrayerCard">
+                <div class="next-prayer-info">
+                    <h3 id="nextPrayerName">الظهر</h3>
+                    <div class="countdown" id="countdown">
+                        <span id="countdownHours">02</span>:<span id="countdownMinutes">30</span>:<span id="countdownSeconds">15</span>
+                    </div>
+                    <p class="next-prayer-time" id="nextPrayerTime">12:15</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section class="location-section">
+            <div class="section-header">
+                <h2>الموقع</h2>
+            </div>
+            
+            <div class="location-card">
+                <div class="location-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="location-details">
+                        <h3 id="locationName">مكة المكرمة</h3>
+                        <p id="locationCountry">المملكة العربية السعودية</p>
+                    </div>
+                </div>
+                <button class="action-btn" id="changeLocationBtn">
+                    <i class="fas fa-edit"></i>
+                    تغيير الموقع
+                </button>
+            </div>
+        </section>
+
+        <!-- Prayer Reminders -->
+        <section class="reminders-section">
+            <div class="section-header">
+                <h2>تذكيرات الصلاة</h2>
+            </div>
+            
+            <div class="reminders-grid">
+                <div class="reminder-card">
+                    <div class="reminder-header">
+                        <i class="fas fa-bell"></i>
+                        <h3>تذكير قبل الصلاة</h3>
+                    </div>
+                    <div class="reminder-time">
+                        <span>15 دقيقة</span>
+                    </div>
+                </div>
+                
+                <div class="reminder-card">
+                    <div class="reminder-header">
+                        <i class="fas fa-volume-up"></i>
+                        <h3>أذان</h3>
+                    </div>
+                    <div class="reminder-time">
+                        <span>مفعل</span>
+                    </div>
+                </div>
+                
+                <div class="reminder-card">
+                    <div class="reminder-header">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>إشعارات</h3>
+                    </div>
+                    <div class="reminder-time">
+                        <span>مفعل</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize prayer times page
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePrayerDate();
+            updateNextPrayer();
+            startCountdown();
+        });
+
+        function updatePrayerDate() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('prayerDate').textContent = now.toLocaleDateString('ar-SA', options);
+        }
+
+        function updateNextPrayer() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            
+            // Sample prayer times (in real app, these would come from API)
+            const prayerTimes = {
+                fajr: { hour: 4, minute: 30, name: 'الفجر' },
+                dhuhr: { hour: 12, minute: 15, name: 'الظهر' },
+                asr: { hour: 15, minute: 45, name: 'العصر' },
+                maghrib: { hour: 18, minute: 20, name: 'المغرب' },
+                isha: { hour: 19, minute: 45, name: 'العشاء' }
+            };
+            
+            let nextPrayer = null;
+            let nextPrayerTime = null;
+            
+            // Find next prayer
+            for (const [prayer, time] of Object.entries(prayerTimes)) {
+                const prayerTime = new Date();
+                prayerTime.setHours(time.hour, time.minute, 0, 0);
+                
+                if (prayerTime > now) {
+                    nextPrayer = time.name;
+                    nextPrayerTime = prayerTime;
+                    break;
+                }
+            }
+            
+            // If no next prayer today, use tomorrow's fajr
+            if (!nextPrayer) {
+                nextPrayer = 'الفجر';
+                nextPrayerTime = new Date();
+                nextPrayerTime.setDate(nextPrayerTime.getDate() + 1);
+                nextPrayerTime.setHours(4, 30, 0, 0);
+            }
+            
+            document.getElementById('nextPrayerName').textContent = nextPrayer;
+            document.getElementById('nextPrayerTime').textContent = nextPrayerTime.toLocaleTimeString('ar-SA', { 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+        }
+
+        function startCountdown() {
+            setInterval(() => {
+                const now = new Date();
+                const nextPrayerTime = new Date();
+                nextPrayerTime.setHours(12, 15, 0, 0); // Sample time
+                
+                if (nextPrayerTime <= now) {
+                    nextPrayerTime.setDate(nextPrayerTime.getDate() + 1);
+                }
+                
+                const diff = nextPrayerTime - now;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdownHours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('countdownMinutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('countdownSeconds').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Change location button
+        document.getElementById('changeLocationBtn').addEventListener('click', function() {
+            alert('سيتم إضافة ميزة تغيير الموقع قريباً');
+        });
+    </script>
+</body>
+</html> 
